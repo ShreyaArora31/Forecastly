@@ -1,6 +1,6 @@
 # 🌤️ Forecastly - Real-Time Weather Dashboard
 
-![Forecastly Screenshot](https://via.placeholder.com/800x400/4A6FA5/FFFFFF?text=Weatherly+Screenshot)  
+![Forecastly Screenshot]![alt text](image.png)  
 _(Replace with actual screenshot of your app)_
 
 A beautiful, responsive weather application that provides real-time weather data for locations worldwide with intuitive visualizations.
