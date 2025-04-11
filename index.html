@@ -1,16 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Weather App</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">Weather App</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -22,12 +35,18 @@
               <a class="nav-link" href="#">About App</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">               
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
               </a>
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="#">Delhi</a></li>
                 <li><a class="dropdown-item" href="#">Mumbai</a></li>
-                <li><hr class="dropdown-divider"></li>
+                <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item" href="#">Bangalore</a></li>
               </ul>
             </li>
@@ -36,15 +55,23 @@
             </li>
           </ul>
           <form class="d-flex" role="search">
-            <input id="city" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit" id="submit">Search</button>
+            <input
+              id="city"
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+            />
+            <button class="btn btn-outline-success" type="submit" id="submit">
+              Search
+            </button>
           </form>
         </div>
       </div>
     </nav>
 
     <div class="container">
-      <h1 class="my-4 text-center ">Weather For <span id="cityName"></span></h1>
+      <h1 class="my-4 text-center">Weather For <span id="cityName"></span></h1>
       <main>
         <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
           <div class="col">
@@ -53,15 +80,24 @@
                 <h4 class="my-0 fw-normal">Temperature</h4>
               </div>
               <div class="card-body">
-                <h1 class="card-title pricing-card-title"><span id="temp2"></span><small class="text-body-secondary fw-light"><span>&#8451;</span></small></h1>
+                <h1 class="card-title pricing-card-title">
+                  <span id="temp2"></span
+                  ><small class="text-body-secondary fw-light"
+                    ><span>&#8451;</span></small
+                  >
+                </h1>
                 <ul class="list-unstyled mt-3 mb-4">
                   <li>Temperature is <span id="temp"></span></li>
                   <li>Feels Like <span id="feels_like"></span></li>
                   <li>Minimum Temperature is <span id="temp_min"></span></li>
                   <li>Maximum Temperature is <span id="temp_max"></span></li>
-                  
                 </ul>
-                <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
+                <button
+                  type="button"
+                  class="w-100 btn btn-lg btn-outline-primary"
+                >
+                  Sign up for free
+                </button>
               </div>
             </div>
           </div>
@@ -71,14 +107,19 @@
                 <h4 class="my-0 fw-normal">Wind Conditions</h4>
               </div>
               <div class="card-body">
-                <h1 class="card-title pricing-card-title"><span id="humidity2"></span><small class="text-body-secondary fw-light"> %</small></h1>
+                <h1 class="card-title pricing-card-title">
+                  <span id="humidity2"></span
+                  ><small class="text-body-secondary fw-light"> %</small>
+                </h1>
                 <ul class="list-unstyled mt-3 mb-4">
                   <li>Condition is <span id="description"></span></li>
                   <li>Humidity <span id="humidity"></span></li>
                   <li>Wind Speed <span id="speed"></span></li>
                   <li>Wind Direction <span id="deg"></span></li>
                 </ul>
-                <button type="button" class="w-100 btn btn-lg btn-primary">Get started</button>
+                <button type="button" class="w-100 btn btn-lg btn-primary">
+                  Get started
+                </button>
               </div>
             </div>
           </div>
@@ -88,43 +129,48 @@
                 <h4 class="my-0 fw-normal">Day/Night Duration</h4>
               </div>
               <div class="card-body">
-                <h1 class="card-title pricing-card-title"><span id="timezone2"></span><small class="text-body-secondary fw-light"></small></h1>
+                <h1 class="card-title pricing-card-title">
+                  <span id="timezone2"></span
+                  ><small class="text-body-secondary fw-light"></small>
+                </h1>
                 <ul class="list-unstyled mt-3 mb-4">
                   <li>Sunrise Time is <span id="sunrise"></span></li>
                   <li>Sunset Time is <span id="sunset"></span></li>
                   <li>Country <span id="country"></span></li>
                   <li>Timezone <span id="timezone"></span></li>
                 </ul>
-                <button type="button" class="w-100 btn btn-lg btn-primary">Contact us</button>
+                <button type="button" class="w-100 btn btn-lg btn-primary">
+                  Contact us
+                </button>
               </div>
             </div>
           </div>
         </div>
-    
+
         <h2 class="display-6 text-center mb-4">Other Places Weather</h2>
-    
+
         <div class="table-responsive">
           <table class="table text-center">
             <thead>
               <tr>
-                <th style="width: 34%;"></th>
-                <th style="width: 22%;"> description </th>
-                <th style="width: 22%;"> temp </th>
-                <th style="width: 22%;"> feels_like </th>
-                <th style="width: 22%;"> temp_min </th>
-                <th style="width: 22%;"> temp_max </th>
-                <th style="width: 22%;"> humidity </th>
-                <th style="width: 22%;"> speed </th>
-                <th style="width: 22%;"> deg </th>
-                <th style="width: 22%;"> sunrise </th>
-                <th style="width: 22%;"> sunset </th>
-                <th style="width: 22%;"> country </th>
-                <th style="width: 22%;"> timezone </th>
+                <th style="width: 34%"></th>
+                <th style="width: 22%">description</th>
+                <th style="width: 22%">temp</th>
+                <th style="width: 22%">feels_like</th>
+                <th style="width: 22%">temp_min</th>
+                <th style="width: 22%">temp_max</th>
+                <th style="width: 22%">humidity</th>
+                <th style="width: 22%">speed</th>
+                <th style="width: 22%">deg</th>
+                <th style="width: 22%">sunrise</th>
+                <th style="width: 22%">sunset</th>
+                <th style="width: 22%">country</th>
+                <th style="width: 22%">timezone</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th scope="row" class="text-start"> Noida </th>
+                <th scope="row" class="text-start">Noida</th>
                 <td>1</td>
                 <td>2</td>
                 <td>3</td>
@@ -139,7 +185,7 @@
                 <td>7</td>
               </tr>
               <tr>
-                <th scope="row" class="text-start"> Hyderabad</th>
+                <th scope="row" class="text-start">Hyderabad</th>
                 <td>1</td>
                 <td>2</td>
                 <td>3</td>
@@ -154,7 +200,7 @@
                 <td>7</td>
               </tr>
             </tbody>
-    
+
             <tbody>
               <tr>
                 <th scope="row" class="text-start">Lucknow</th>
@@ -200,14 +246,18 @@
                 <td>10</td>
                 <td>6</td>
                 <td>7</td>
+                <td>8</td>
               </tr>
-              
             </tbody>
           </table>
         </div>
       </main>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js"></script>
   </body>
 </html>
