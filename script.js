@@ -20,6 +20,8 @@ const country = document.getElementById("country");
 const timezone = document.getElementById("timezone");
 const timezone2 = document.getElementById("timezone2");
 
+const aboutLink = document.getElementById("aboutLink");
+const guideLink = document.getElementById("guideLink");
 const weatherEmojis = {
   'clear sky': '☀️',
   'few clouds': '🌤️',
@@ -41,15 +43,15 @@ function formatTime(unix, offset) {
 }
 function formatTimezone(seconds) {
   if (!seconds && seconds !== 0) return "N/A"; // Handle undefined/null cases
-  
+
   // Convert seconds to hours and minutes
   const hours = Math.floor(Math.abs(seconds) / 3600);
   const minutes = Math.floor((Math.abs(seconds) % 3600) / 60);
   const sign = seconds >= 0 ? '+' : '-';
-  
+
   // Special case for IST (Indian Standard Time)
   if (seconds === 19800) return "IST (UTC+5:30)";
-  
+
   return `UTC${sign}${hours}:${minutes.toString().padStart(2, '0')}`;
 }
 
@@ -59,20 +61,20 @@ async function updateOtherCitiesTable() {
   tableBody.innerHTML = '<tr><td colspan="13">⏳ Loading data...</td></tr>';
 
   try {
-  tableBody.innerHTML = ""; // Clear existing rows
+    tableBody.innerHTML = ""; // Clear existing rows
 
-  for (const city of otherCities) {
-    try {
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
-      );
-      const data = await response.json();
+    for (const city of otherCities) {
+      try {
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+        );
+        const data = await response.json();
 
-      if (data.cod === 200) {
-        const weatherDesc = data.weather[0].description.toLowerCase();
+        if (data.cod === 200) {
+          const weatherDesc = data.weather[0].description.toLowerCase();
           const emoji = weatherEmojis[weatherDesc] || '🌍';
-        const row = document.createElement("tr");
-        row.innerHTML = `
+          const row = document.createElement("tr");
+          row.innerHTML = `
           <td class="text-start fw-bold">${data.name}</td>
           <td>${data.weather[0].description} ${emoji}</td>
           <td>🌡️ ${Math.round(data.main.temp)} °C</td>
@@ -87,22 +89,22 @@ async function updateOtherCitiesTable() {
           <td>${data.sys.country}</td>
           <td>⏰ ${formatTimezone(data.timezone)}</td>
         `;
-        tableBody.appendChild(row);
-      }
-    } catch (err) {
-      console.error(`Error fetching weather for ${city}:`, err);
-      const errorRow = document.createElement("tr");
-      errorRow.innerHTML = `
+          tableBody.appendChild(row);
+        }
+      } catch (err) {
+        console.error(`Error fetching weather for ${city}:`, err);
+        const errorRow = document.createElement("tr");
+        errorRow.innerHTML = `
         <td class="text-start fw-bold">❌ ${city}</td>
         <td colspan="12" class="text-danger">Error loading data</td>
       `;
-      tableBody.appendChild(errorRow);
+        tableBody.appendChild(errorRow);
+      }
     }
+  } catch (error) {
+    console.error('Error updating cities table:', error);
+    tableBody.innerHTML = '<tr><td colspan="13" class="text-danger">❌ Failed to load data. Please try again.</td></tr>';
   }
-} catch (error) {
-  console.error('Error updating cities table:', error);
-  tableBody.innerHTML = '<tr><td colspan="13" class="text-danger">❌ Failed to load data. Please try again.</td></tr>';
-}
 }
 
 const getWeather = (city) => {
@@ -130,7 +132,7 @@ const getWeather = (city) => {
       temp_max.innerHTML = data.main.temp_max;
 
       humidity.innerHTML = `💧 ${data.main.humidity}%`;
-      humidity2.innerHTML = `${data.main.humidity}%💧`;
+      humidity2.innerHTML = `${data.main.humidity}%`;
       speed.innerHTML = `🌬️ ${data.wind.speed}`;
       deg.innerHTML = `🧭 ${data.wind.deg}°`;
 
@@ -153,6 +155,21 @@ submit.addEventListener("click", (e) => {
     getWeather(city);
   }
 });
+// Add these event listeners to your existing JavaScript
+if (aboutLink) {
+  aboutLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    const aboutModal = new bootstrap.Modal(document.getElementById('aboutModal'));
+    aboutModal.show();
+  });
+}
+if (guideLink) {
+  guideLink.addEventListener('click', function (e) {
+    e.preventDefault();
+    const guideModal = new bootstrap.Modal(document.getElementById('guideModal'));
+    guideModal.show();
+  });
+}
 
 //default load
 // Initialize the app

@@ -78,7 +78,47 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+        /* About & Guide Modals */
+.modal-content {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-body {
+  padding: 2rem;
+}
+
+/* Accordion Styles */
+.accordion-button {
+  font-weight: 500;
+  padding: 1rem 1.25rem;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: rgba(13, 110, 253, 0.1);
+  color: #0d6efd;
+}
+
+/* Feature Icons */
+.bi {
+  margin-right: 8px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .modal-body {
+    padding: 1.5rem;
+  }
+  
+  .accordion-button {
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+  }
+}
         .weather-card {
             background: white;
             border-radius: 12px;

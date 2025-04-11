@@ -11,6 +11,7 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -35,7 +36,7 @@
             <li class="nav-item">
               <a class="nav-link" href="#">About App</a>
             </li>
-            <li class="nav-item dropdown">
+            <!--<li class="nav-item dropdown">
               <a
                 class="nav-link dropdown-toggle"
                 href="#"
@@ -50,7 +51,7 @@
                 <li><hr class="dropdown-divider" /></li>
                 <li><a class="dropdown-item" href="#">Bangalore</a></li>
               </ul>
-            </li>
+            </li>-->
             <li class="nav-item">
               <a class="nav-link">Usage Guide</a>
             </li>
@@ -251,5 +252,160 @@
       crossorigin="anonymous"
     ></script>
     <script src="script.js"></script>
+    <!-- Add these navigation links in your navbar -->
+<li class="nav-item">
+  <a class="nav-link" href="#" id="aboutLink">About App</a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="#" id="guideLink">Usage Guide</a>
+</li>
+
+<!-- Add these modal dialogs before the closing </body> tag -->
+<!-- About App Modal -->
+<div class="modal fade" id="aboutModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title">About Forecastly</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="text-center mb-4">
+          <img src="https://via.placeholder.com/100/4A6FA5/FFFFFF?text=🌤️" alt="App Icon" class="rounded-circle mb-3">
+          <h3>Forecastly</h3>
+          <p class="text-muted">Version 1.0.0</p>
+        </div>
+        
+        <div class="mb-4">
+          <h5><i class="bi bi-info-circle"></i> App Description</h5>
+          <p>Forecastly provides accurate, real-time weather information for locations worldwide. Get detailed forecasts, severe weather alerts, and beautiful visualizations to plan your day perfectly.</p>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <h5><i class="bi bi-star"></i> Key Features</h5>
+            <ul>
+              <li>Real-time weather updates</li>
+              <li>5-day forecasts</li>
+              <li>Multiple location support</li>
+              <li>Interactive weather maps</li>
+              <li>Customizable notifications</li>
+            </ul>
+          </div>
+          <div class="col-md-6 mb-3">
+            <h5><i class="bi bi-gear"></i> Technical Info</h5>
+            <ul>
+              <li>Powered by OpenWeatherMap API</li>
+              <li>Built with Bootstrap 5</li>
+              <li>100% client-side JavaScript</li>
+              <li>Responsive design</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="text-center mt-4">
+          <button class="btn btn-outline-primary me-2">
+            <i class="bi bi-star"></i> Rate App
+          </button>
+          <button class="btn btn-outline-secondary">
+            <i class="bi bi-share"></i> Share
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- User Guide Modal -->
+<div class="modal fade" id="guideModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title">User Guide</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="accordion" id="guideAccordion">
+          <!-- Getting Started -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#gettingStarted">
+                <i class="bi bi-house-door me-2"></i> Getting Started
+              </button>
+            </h2>
+            <div id="gettingStarted" class="accordion-collapse collapse show" data-bs-parent="#guideAccordion">
+              <div class="accordion-body">
+                <ol>
+                  <li>Type your city name in the search bar</li>
+                  <li>Press Enter or click the Search button</li>
+                  <li>View current weather conditions</li>
+                  <li>Scroll down for extended forecasts</li>
+                </ol>
+                <img src="https://via.placeholder.com/600x200/EEE/999999?text=Search+Demo" class="img-fluid rounded mt-2">
+              </div>
+            </div>
+          </div>
+          
+          <!-- Understanding Data -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#understandingData">
+                <i class="bi bi-graph-up me-2"></i> Understanding Weather Data
+              </button>
+            </h2>
+            <div id="understandingData" class="accordion-collapse collapse" data-bs-parent="#guideAccordion">
+              <div class="accordion-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h6><i class="bi bi-thermometer-sun"></i> Temperature</h6>
+                    <p>Shows current, feels-like, min and max temperatures in Celsius</p>
+                    
+                    <h6><i class="bi bi-droplet"></i> Humidity</h6>
+                    <p>Percentage of water vapor in the air</p>
+                  </div>
+                  <div class="col-md-6">
+                    <h6><i class="bi bi-wind"></i> Wind</h6>
+                    <p>Speed in m/s and direction in degrees</p>
+                    
+                    <h6><i class="bi bi-sunrise"></i> Sunrise/Sunset</h6>
+                    <p>Local times for daylight changes</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Troubleshooting -->
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#troubleshooting">
+                <i class="bi bi-question-circle me-2"></i> Troubleshooting
+              </button>
+            </h2>
+            <div id="troubleshooting" class="accordion-collapse collapse" data-bs-parent="#guideAccordion">
+              <div class="accordion-body">
+                <h6><i class="bi bi-exclamation-triangle"></i> No Results Found</h6>
+                <ul>
+                  <li>Check your internet connection</li>
+                  <li>Verify city name spelling</li>
+                  <li>Try broader location (e.g., state instead of city)</li>
+                </ul>
+                
+                <h6><i class="bi bi-arrow-clockwise"></i> Data Not Updating</h6>
+                <ul>
+                  <li>Refresh the page</li>
+                  <li>Wait 1-2 minutes for API limits</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-info" data-bs-dismiss="modal">Got It!</button>
+      </div>
+    </div>
+  </div>
+</div>
   </body>
 </html>
