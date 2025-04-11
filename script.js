@@ -73,6 +73,8 @@ submit.addEventListener("click", (e) => {
 //default load
 getWeather("Delhi");
 
+
+
 // Replace with your real OpenWeatherMap API key
 /*const API_KEY = '245cd0cc1746376bb72daab5fe3774ce';
 
