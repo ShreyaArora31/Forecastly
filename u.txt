@@ -1,0 +1,22 @@
+{
+      description = response.description
+      temp = response.temp
+      feels_like = response.feels_like
+      temp_min = response.temp_min
+      temp_max = response.temp_max
+      pressure = response.pressure
+      humidity = response.humidity
+      sea_level = response.sea_level
+      grnd_level = response.grnd_level
+      visibiity = response.visibiity
+      speed = response.speed
+      deg = response.deg
+      gust = response.gust
+      sunrise = response.sunrise
+      sunset = response.sunset
+      country = response.country
+      timezone = response.timezone
+      id = response.id
+      name = response.name
+      cod = response.cod
+}
