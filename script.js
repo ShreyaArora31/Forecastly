@@ -105,8 +105,8 @@ const getWeather = (city) => {
       sunrise.innerHTML = formatTime(data.sys.sunrise, data.timezone);
       sunset.innerHTML = formatTime(data.sys.sunset, data.timezone);
       country.innerHTML = data.sys.country;
-      timezone.innerHTML = data.timezone + " sec";
-      timezone2.innerHTML = data.timezone + " sec";
+      timezone.innerHTML = formatTimezone(data.timezone);
+      timezone2.innerHTML = formatTimezone(data.timezone);
     })
     .catch((err) => {
       alert("City not found or an error occurred.");
