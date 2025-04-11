@@ -20,6 +20,19 @@ const country = document.getElementById("country");
 const timezone = document.getElementById("timezone");
 const timezone2 = document.getElementById("timezone2");
 
+const weatherEmojis = {
+  'clear sky': '☀️',
+  'few clouds': '🌤️',
+  'scattered clouds': '⛅',
+  'broken clouds': '☁️',
+  'shower rain': '🌧️',
+  'rain': '🌧️',
+  'thunderstorm': '⛈️',
+  'snow': '❄️',
+  'mist': '🌫️',
+  'haze': '🌫️',
+  'fog': '🌫️'
+};
 
 const otherCities = ["Noida", "Hyderabad", "Lucknow", "Kolkata", "Pune"];
 // Convert Unix time to local readable time
@@ -43,6 +56,9 @@ function formatTimezone(seconds) {
 // Fetch weather for other cities and update table
 async function updateOtherCitiesTable() {
   const tableBody = document.getElementById("otherCitiesBody");
+  tableBody.innerHTML = '<tr><td colspan="13">⏳ Loading data...</td></tr>';
+
+  try {
   tableBody.innerHTML = ""; // Clear existing rows
 
   for (const city of otherCities) {
@@ -53,28 +69,40 @@ async function updateOtherCitiesTable() {
       const data = await response.json();
 
       if (data.cod === 200) {
+        const weatherDesc = data.weather[0].description.toLowerCase();
+          const emoji = weatherEmojis[weatherDesc] || '🌍';
         const row = document.createElement("tr");
         row.innerHTML = `
           <td class="text-start fw-bold">${data.name}</td>
-          <td>${data.weather[0].description}</td>
-          <td>${Math.round(data.main.temp)} °C</td>
-          <td>${Math.round(data.main.feels_like)} °C</td>
-          <td>${Math.round(data.main.temp_min)} °C</td>
-          <td>${Math.round(data.main.temp_max)} °C</td>
-          <td>${data.main.humidity}%</td>
+          <td>${data.weather[0].description} ${emoji}</td>
+          <td>🌡️ ${Math.round(data.main.temp)} °C</td>
+          <td>💭 ${Math.round(data.main.feels_like)} °C</td>
+          <td>⬇️ ${Math.round(data.main.temp_min)} °C</td>
+          <td>⬆️ ${Math.round(data.main.temp_max)} °C</td>
+          <td>💧 ${data.main.humidity}%</td>
           <td>${data.wind.speed} m/s</td>
-          <td>${data.wind.deg}°</td>
-          <td>${formatTime(data.sys.sunrise, data.timezone)}</td>
-          <td>${formatTime(data.sys.sunset, data.timezone)}</td>
+          <td>🧭 ${data.wind.deg}°</td>
+          <td>🌅 ${formatTime(data.sys.sunrise, data.timezone)}</td>
+          <td>🌇 ${formatTime(data.sys.sunset, data.timezone)}</td>
           <td>${data.sys.country}</td>
-          <td>${formatTimezone(data.timezone)}</td>
+          <td>⏰ ${formatTimezone(data.timezone)}</td>
         `;
         tableBody.appendChild(row);
       }
     } catch (err) {
       console.error(`Error fetching weather for ${city}:`, err);
+      const errorRow = document.createElement("tr");
+      errorRow.innerHTML = `
+        <td class="text-start fw-bold">❌ ${city}</td>
+        <td colspan="12" class="text-danger">Error loading data</td>
+      `;
+      tableBody.appendChild(errorRow);
     }
   }
+} catch (error) {
+  console.error('Error updating cities table:', error);
+  tableBody.innerHTML = '<tr><td colspan="13" class="text-danger">❌ Failed to load data. Please try again.</td></tr>';
+}
 }
 
 const getWeather = (city) => {
@@ -84,7 +112,8 @@ const getWeather = (city) => {
     .then(response => response.json())
     .then((data) => {
       if (data.cod !== 200) throw new Error("City not found");
-
+      const weatherDesc = data.weather[0].description.toLowerCase();
+      const emoji = weatherEmojis[weatherDesc] || '🌍';
       cityName.innerHTML = data.name;
 
       const main = data.main;
@@ -92,21 +121,24 @@ const getWeather = (city) => {
       const weather = data.weather[0];
       const sys = data.sys;
 
-      description.innerHTML = data.weather[0].description;
+      description.innerHTML = `${data.weather[0].description} ${emoji}`;
+
       temp.innerHTML = data.main.temp;
       temp2.innerHTML = data.main.temp;
       feels_like.innerHTML = data.main.feels_like;
       temp_min.innerHTML = data.main.temp_min;
       temp_max.innerHTML = data.main.temp_max;
-      humidity.innerHTML = data.main.humidity;
-      humidity2.innerHTML = data.main.humidity;
-      speed.innerHTML = data.wind.speed;
-      deg.innerHTML = data.wind.deg;
-      sunrise.innerHTML = formatTime(data.sys.sunrise, data.timezone);
-      sunset.innerHTML = formatTime(data.sys.sunset, data.timezone);
+
+      humidity.innerHTML = `💧 ${data.main.humidity}%`;
+      humidity2.innerHTML = `${data.main.humidity}%💧`;
+      speed.innerHTML = `🌬️ ${data.wind.speed}`;
+      deg.innerHTML = `🧭 ${data.wind.deg}°`;
+
+      sunrise.innerHTML = `🌅 ${formatTime(data.sys.sunrise, data.timezone)}`;
+      sunset.innerHTML = `🌇 ${formatTime(data.sys.sunset, data.timezone)}`;
       country.innerHTML = data.sys.country;
-      timezone.innerHTML = formatTimezone(data.timezone);
-      timezone2.innerHTML = formatTimezone(data.timezone);
+      timezone.innerHTML = `⏰ ${formatTimezone(data.timezone)}`;
+      timezone2.innerHTML = `${formatTimezone(data.timezone)}`;
     })
     .catch((err) => {
       alert("City not found or an error occurred.");
