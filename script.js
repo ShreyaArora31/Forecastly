@@ -20,9 +20,61 @@ const country = document.getElementById("country");
 const timezone = document.getElementById("timezone");
 const timezone2 = document.getElementById("timezone2");
 
+
+const otherCities = ["Noida", "Hyderabad", "Lucknow", "Kolkata", "Pune"];
 // Convert Unix time to local readable time
 function formatTime(unix, offset) {
   return new Date((unix + offset) * 1000).toUTCString().match(/(\d{2}:\d{2}:\d{2})/)[0];
+}
+function formatTimezone(seconds) {
+  if (!seconds && seconds !== 0) return "N/A"; // Handle undefined/null cases
+  
+  // Convert seconds to hours and minutes
+  const hours = Math.floor(Math.abs(seconds) / 3600);
+  const minutes = Math.floor((Math.abs(seconds) % 3600) / 60);
+  const sign = seconds >= 0 ? '+' : '-';
+  
+  // Special case for IST (Indian Standard Time)
+  if (seconds === 19800) return "IST (UTC+5:30)";
+  
+  return `UTC${sign}${hours}:${minutes.toString().padStart(2, '0')}`;
+}
+
+// Fetch weather for other cities and update table
+async function updateOtherCitiesTable() {
+  const tableBody = document.getElementById("otherCitiesBody");
+  tableBody.innerHTML = ""; // Clear existing rows
+
+  for (const city of otherCities) {
+    try {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`
+      );
+      const data = await response.json();
+
+      if (data.cod === 200) {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td class="text-start fw-bold">${data.name}</td>
+          <td>${data.weather[0].description}</td>
+          <td>${Math.round(data.main.temp)} °C</td>
+          <td>${Math.round(data.main.feels_like)} °C</td>
+          <td>${Math.round(data.main.temp_min)} °C</td>
+          <td>${Math.round(data.main.temp_max)} °C</td>
+          <td>${data.main.humidity}%</td>
+          <td>${data.wind.speed} m/s</td>
+          <td>${data.wind.deg}°</td>
+          <td>${formatTime(data.sys.sunrise, data.timezone)}</td>
+          <td>${formatTime(data.sys.sunset, data.timezone)}</td>
+          <td>${data.sys.country}</td>
+          <td>${formatTimezone(data.timezone)}</td>
+        `;
+        tableBody.appendChild(row);
+      }
+    } catch (err) {
+      console.error(`Error fetching weather for ${city}:`, err);
+    }
+  }
 }
 
 const getWeather = (city) => {
@@ -71,7 +123,18 @@ submit.addEventListener("click", (e) => {
 });
 
 //default load
-getWeather("Delhi");
+// Initialize the app
+function initApp() {
+  getWeather("Delhi");
+  updateOtherCitiesTable();
+}
+
+// Load the app when DOM is ready
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initApp);
+} else {
+  initApp();
+}
 
 
 
